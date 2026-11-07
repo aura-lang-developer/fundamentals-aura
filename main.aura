@@ -35,6 +35,9 @@ struct User {
   is_active: Bool,
 }
 
+// Tuple structs
+struct Color(Int32, Int32, Int32);
+
 export fn main(): Unit => {
   println("AppName: ", AppName);
   println("Author: ", Author);
@@ -128,5 +131,10 @@ export fn main(): Unit => {
   println(`Email: ${user.email}`);
   println(`Sign In Count: ${user.sign_in_count}`);
   println(`Is Active: ${user.is_active}`);
+
+  let black: Color = (0, 0, 0);
+  let(r1, g1, b1) = black;
+  println(`Color: ${black}`);
+  println(`black.x: ${r1}, black.y: ${g1}, black.z: ${b1}`);
 
 }

@@ -1,0 +1,132 @@
+let PI: Float = 3.14159;
+let MAX_CONNECTIONS: Int = 100;
+let API_VERSION = "v1.0";
+let AppName = "Curso Aura Lang 1.0"
+let Author = "Mauricio Rojas"
+let Version = "1.0.0"
+let Description = "Aplicación de ejemplo para el curso de Aura Lang"
+
+type Value =
+| IntVal(Int)
+| FloatVal(Float)
+| TextVal(String)
+| BoolVal(Bool);
+
+fn printType(v: Value): Unit => {
+  match v {
+    IntVal(n) => println(`Tipo: Int, valor: ${n}`),
+    FloatVal(f) => println(`Tipo: Float, valor: ${f}`),
+    TextVal(s) => println(`Tipo: String, valor: ${s}`),
+    BoolVal(b) => println(`Tipo: Bool, valor: ${b}`),
+  }
+}
+
+fn calculate_sum_and_product(a: i32, b: i32): (i32, i32) => {
+  let sum = a + b;
+  let product = a * b;
+  (sum, product);
+}
+
+// Classic struct
+struct User {
+  username: String,
+  email: String,
+  sign_in_count: Uint64,
+  is_active: Bool,
+}
+
+export fn main(): Unit => {
+  println("AppName: ", AppName);
+  println("Author: ", Author);
+  println("Version: ", Version);
+  println("Description: ", Description);
+  printType(IntVal(10));
+  printType(FloatVal(10.5));
+  printType(TextVal("Hola"));
+  printType(BoolVal(true));
+  // Enteros estándar y con tamaño explícito
+  let i: Int = 42;// Entero nativo de 64 bits
+  let i8: Int8 = 127;// Con signo: -128 a 127
+  let i16: Int16 = 32767;
+  let i32: Int32 = 2147483647;
+  let i64: Int64 = 9223372036854775807;
+
+  // Enteros sin signo
+  let u8: Uint8 = 255;// Sin signo: 0 a 255 (alias Byte)
+  let u16: Uint16 = 65535;
+  let u32: Uint32 = 4294967295;
+  let u64: Uint64 = 18446744073709551615u64;// Nota: aurac v0.8.4 limita literales numéricos a Int64 (máx literal decimal soportado es 9223372036854775807)
+  let b: Byte = 255;// Byte binario
+  let r: Rune = 65;// Rune Unicode UTF-32 (equivalente a 'A')
+  let up: Uintptr = 0;// Puntero entero para sistemas
+
+  // Números de coma flotante
+  let f: Float = 3.14159265;// Float de 64 bits (por defecto)
+  let f32: Float32 = 3.14;
+  let f64: Float64 = 2.718281828459;
+
+  // Cadenas, Booleanos y Tipo Unidad
+  let s: String = "Aura Language";
+  let flag: Bool = true;
+  let empty: Unit = ();
+  println("Enteros:", i, i8, i16, i32, i64);
+  println("Enteros sin signo:", u8, u16, u32, u64, b, r, up);
+  println("Floats:", f, f32, f64);
+  println("Cadenas, Booleanos y Unidad:", s, flag, empty);
+
+  let my_tuple: (i32, f64, char) = (500, 6.4, "A");
+  // Destructured values
+  let(x, y, z) = my_tuple;
+  println("x: ", x);
+  println("y: ", y);
+  println("z: ", z);
+
+  // Direct access using dot notation or index position
+  let my_record = {x: 700, y: 7.1, z: "B"};
+  println("x: ", my_record.x);
+  println("y: ", my_record.y);
+  println("z: ", my_record.z);
+
+  let input1 = 10;
+  let input2 = 5;
+
+  // Call the function and destructure the returned tuple directly into variables.
+  let(sum_result, product_result) = calculate_sum_and_product(input1, input2);
+  println(`For: ${input1} and ${input2}`);
+  println(`  Sum: ${sum_result}, Product: ${product_result}`);
+
+  // Arrays
+  // Define un array de 3 enteros y accede a sus elementos
+  let numeros: []Int = [1, 2, 3];
+  let len = numeros.len;
+  println("Length: ", len);
+  println("Element at index 0: ", numeros[0]);
+  println("Element at index 1: ", numeros[1]);
+  println("Element at index 2: ", numeros[2]);
+
+  // Slice
+  let otros_numeros = [10, 20, 30, 40, 50];
+  // Create a slice the references elements from index 1 up to 2
+  let slice = & otros_numeros[1..3];
+  println(`other numbers: ${otros_numeros}`);
+  println(`Slice: ${slice.value}`);
+
+  let mut str: String = "String mutable";
+  str += " Appended";
+  println(`String mutable: ${str}`);
+
+  // Constructor of Struct (Struct literal)
+  // Instanciación del struct
+  let user: User = {
+    username: "mauricio",
+    email: "mauricio@ejemplo.com",
+    sign_in_count: 1,
+    is_active: true,
+  };
+
+  println(`Username: ${user.username}`);
+  println(`Email: ${user.email}`);
+  println(`Sign In Count: ${user.sign_in_count}`);
+  println(`Is Active: ${user.is_active}`);
+
+}
